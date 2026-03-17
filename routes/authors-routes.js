@@ -1,14 +1,12 @@
 import express from "express";
+import { getAuthors, createAuthor } from "../controllers/authorsController.js";
 
 const router = express.Router();
 
-const authors = [
-  { id: 1, name: "Nadia" },
-  { id: 2, name: "Otro autor" }
-];
+// GET todos los autores
+router.get("/", getAuthors);
 
-router.get("/", (req, res) => {
-  res.json(authors);
-});
+// POST nuevo autor
+router.post("/", createAuthor);
 
 export default router;

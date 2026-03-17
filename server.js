@@ -2,28 +2,21 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from "express";
+import authorsRoutes from "./routes/authors-routes.js"
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Ruta principal
+app.use("/api/authors", authorsRoutes);
+
+// Ruta de prueba
 app.get("/", (req, res) => {
-  res.send("Servidor funcionando correctamente");
+  res.send("Servidor funcionando correctamente 💖");
 });
 
-// Ruta de autores
-app.get("/api/authors", (req, res) => {
-  const authors = [
-    { id: 1, name: "Nadia" },
-    { id: 2, name: "Otro autor" }
-  ];
-
-  res.json(authors);
-});
-
-// Ruta no encontrada
+// Manejo de rutas no encontradas
 app.use((req, res) => {
   res.status(404).json({ error: "Ruta no encontrada" });
 });
@@ -32,3 +25,4 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
