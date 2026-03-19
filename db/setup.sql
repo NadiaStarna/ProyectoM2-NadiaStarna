@@ -1,6 +1,6 @@
 -- db/setup.sql
 
-CREATE TABLE authors (
+CREATE TABLE autores (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE,

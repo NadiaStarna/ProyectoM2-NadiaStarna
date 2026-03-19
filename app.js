@@ -5,8 +5,8 @@ import postsRoutes from "./routes/posts-routes.js";
 const app = express();
 
 app.use(express.json());
-app.use("/api/autores", authorsRoutes);
-app.use("/api/posts", postsRoutes);
+app.use("/authors", authorsRoutes);
+app.use("/posts", postsRoutes);
 
 app.get("/", (req, res) => {
   res.send("Servidor funcionando correctamente");
