@@ -66,5 +66,6 @@ test("PUT /api/posts/:id - debería actualizar el post", async () => {
 });
 
 afterAll(async () => {
-  await pool.end(); // cierra la conexión a PostgreSQL
+  await pool.end(); 
 });
+

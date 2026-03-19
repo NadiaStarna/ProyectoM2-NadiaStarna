@@ -2,57 +2,67 @@ import request from "supertest";
 import app from "../app.js";
 import pool from "../db/database.js";
 
+// Función para generar un email aleatorio y evitar duplicados
+const randomEmail = () => `testautor_${Date.now()}@example.com`;
+
 describe("Autores API", () => {
   let newAuthorId;
 
-  test("GET /api/autores - debería devolver todos los autores", async () => {
-    const res = await request(app).get("/api/autores");
+  test("GET /authors - debería devolver todos los autores", async () => {
+    const res = await request(app).get("/authors");
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
   });
 
-  test("POST /api/autores - debería crear un nuevo autor", async () => {
+  test("POST /authors - debería crear un nuevo autor", async () => {
     const res = await request(app)
-      .post("/api/autores")
+      .post("/authors")
       .send({
         name: "Test Autor",
-        email: "testautor@example.com",
+        email: randomEmail(),
         bio: "Bio de prueba"
       });
+
     expect(res.statusCode).toBe(201);
     expect(res.body.name).toBe("Test Autor");
     newAuthorId = res.body.id;
   });
 
-  test("GET /api/autores/:id - debería devolver el autor recién creado", async () => {
-    const res = await request(app).get(`/api/autores/${newAuthorId}`);
+  test("GET /authors/:id - debería devolver el autor recién creado", async () => {
+    const res = await request(app).get(`/authors/${newAuthorId}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.id).toBe(newAuthorId);
   });
 
-  test("PUT /api/autores/:id - debería actualizar el autor", async () => {
+  test("PUT /authors/:id - debería actualizar el autor", async () => {
     const res = await request(app)
-      .put(`/api/autores/${newAuthorId}`)
+      .put(`/authors/${newAuthorId}`)
       .send({
         name: "Autor Modificado",
-        email: "modificado@example.com",
+        email: randomEmail(),
         bio: "Bio modificada"
       });
+
     expect(res.statusCode).toBe(200);
     expect(res.body.name).toBe("Autor Modificado");
   });
 
-  test("DELETE /api/autores/:id - debería eliminar el autor", async () => {
-    const res = await request(app).delete(`/api/autores/${newAuthorId}`);
+  test("DELETE /authors/:id - debería eliminar el autor", async () => {
+    const res = await request(app).delete(`/authors/${newAuthorId}`);
     expect(res.statusCode).toBe(204);
   });
 
-  test("GET /api/autores/:id - debería devolver 404 para autor eliminado", async () => {
-    const res = await request(app).get(`/api/autores/${newAuthorId}`);
+  test("GET /authors/:id - debería devolver 404 para autor eliminado", async () => {
+    const res = await request(app).get(`/authors/${newAuthorId}`);
     expect(res.statusCode).toBe(404);
   });
 });
 
 afterAll(async () => {
-  await pool.end(); 
+  try {
+    await pool.end();
+    console.log("Conexión a la DB cerrada correctamente");
+  } catch (err) {
+    console.error("Error cerrando la conexión a la DB:", err);
+  }
 });

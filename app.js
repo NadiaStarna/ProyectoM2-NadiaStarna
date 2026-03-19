@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 app.use("/authors", authorsRoutes);
-app.use("/posts", postsRoutes);
+app.use("/api/posts", postsRoutes);
 
 app.get("/", (req, res) => {
   res.send("Servidor funcionando correctamente");
