@@ -1,0 +1,20 @@
+import { Router } from 'express';
+import {
+  getAllPosts,
+  getPostById,
+  getPostsByAuthor,
+  createPost,
+  updatePost,
+  deletePost
+} from '../controllers/posts-controller.js';
+
+const postsRouter = Router();
+
+postsRouter.get('/',                 getAllPosts);
+postsRouter.get('/author/:authorId', getPostsByAuthor);
+postsRouter.get('/:id',              getPostById);
+postsRouter.post('/',                createPost);
+postsRouter.put('/:id',              updatePost);
+postsRouter.delete('/:id',           deletePost);
+
+export default postsRouter;
