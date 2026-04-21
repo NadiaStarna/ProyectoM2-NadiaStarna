@@ -114,18 +114,7 @@ Para visualizarla online:
 
 La API está desplegada en Railway.
 
-**URL pública:** https://proyectom2-nadiastarna-production-dc94.up.railway.app
-
-### Variables de entorno en Railway
-
-| Variable | Valor |
-|----------|-------|
-| DB_HOST | postgres.railway.internal |
-| DB_PORT | 5432 |
-| DB_USER | postgres |
-| DB_PASSWORD | (privado) |
-| DB_NAME | railway |
-| PORT | 3000 |
+**URL pública:** https://proyectom2-nadiastarna-production-dc94.up.railway.app 
 
 ### Pasos para redeploy
 

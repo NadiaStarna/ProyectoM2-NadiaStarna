@@ -7,7 +7,7 @@ info:
 servers:
   - url: http://localhost:3000/api
     description: Servidor local
-  - url: https://tu-app.railway.app/api
+  - url: https://proyectom2-nadiastarna-production-dc94.up.railway.app 
     description: Servidor producción Railway
 
 paths:
