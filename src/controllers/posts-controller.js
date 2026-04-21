@@ -13,7 +13,7 @@ export const getAllPosts = async (req, res, next) => {
 
 export const getPostById = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = Number (req.params.id);
     const post = await postsService.getPostById(id);
     if (!post) return res.status(404).json({ error: 'Post no encontrado' });
     res.status(200).json(post);
@@ -25,8 +25,10 @@ export const getPostById = async (req, res, next) => {
 export const getPostsByAuthor = async (req, res, next) => {
   try {
     const { authorId } = req.params;
+
     const author = await authorsService.getAuthorById(authorId);
     if (!author) return res.status(404).json({ error: 'Autor no encontrado' });
+
     const posts = await postsService.getPostsByAuthor(authorId);
     res.status(200).json(posts);
   } catch (error) {
@@ -36,18 +38,22 @@ export const getPostsByAuthor = async (req, res, next) => {
 
 export const createPost = async (req, res, next) => {
   try {
-    const { author_id, title, content, published } = req.body;
+    const { title, content, published } = req.body;
+    const author_id = Number(req.body.author_id);
+
     if (!title || title.trim() === '') {
       return res.status(400).json({ error: 'El titulo es obligatorio' });
     }
     if (!content || content.trim() === '') {
       return res.status(400).json({ error: 'El contenido es obligatorio' });
     }
-    if (!author_id) {
+    if (!author_id || isNaN(author_id)) {
       return res.status(400).json({ error: 'El author_id es obligatorio' });
     }
+
     const author = await authorsService.getAuthorById(author_id);
     if (!author) return res.status(404).json({ error: 'Autor no encontrado' });
+
     const post = await postsService.createPost(author_id, title, content, published);
     res.status(201).json(post);
   } catch (error) {
@@ -57,7 +63,7 @@ export const createPost = async (req, res, next) => {
 
 export const updatePost = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = Number (req.params.id);
     const { title, content, published } = req.body;
     if (!title || title.trim() === '') {
       return res.status(400).json({ error: 'El titulo es obligatorio' });
@@ -75,7 +81,7 @@ export const updatePost = async (req, res, next) => {
 
 export const deletePost = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = Number (req.params.id);
     const post = await postsService.deletePost(id);
     if (!post) return res.status(404).json({ error: 'Post no encontrado' });
     res.status(204).send();

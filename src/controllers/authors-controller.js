@@ -11,7 +11,7 @@ export const getAllAuthors = async (req, res, next) => {
 
 export const getAuthorById = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = Number (req.params.id);
     const author = await authorsService.getAuthorById(id);
     if (!author) return res.status(404).json({ error: 'Autor no encontrado' });
     res.status(200).json(author);
@@ -41,7 +41,7 @@ export const createAuthor = async (req, res, next) => {
 
 export const updateAuthor = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = Number (req.params.id);
     const { name, email, bio } = req.body;
     if (!name || name.trim() === '') {
       return res.status(400).json({ error: 'El nombre es obligatorio' });
@@ -62,7 +62,7 @@ export const updateAuthor = async (req, res, next) => {
 
 export const deleteAuthor = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const id = Number (req.params.id);
     const author = await authorsService.deleteAuthor(id);
     if (!author) return res.status(404).json({ error: 'Autor no encontrado' });
     res.status(204).send();

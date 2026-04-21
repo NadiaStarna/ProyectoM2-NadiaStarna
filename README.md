@@ -2,6 +2,9 @@
 
 API REST para gestión de autores y posts, desarrollada con Node.js, Express y PostgreSQL.
 
+Este proyecto implementa una arquitectura backend completa con validaciones, testing automatizado y
+documentación OpenAPI, simulando un entorno real de desarrollo.
+
 ## Tecnologías
 
 - Node.js
@@ -25,7 +28,7 @@ API REST para gestión de autores y posts, desarrollada con Node.js, Express y P
 
 ```bash
 git clone https://github.com/NadiaStarna/ProyectoM2-NadiaStarna.git
-cd PI-MINI-BLOG
+cd ProyectoM2-NadiaStarna
 ```
 
 ### 2. Instalar dependencias
