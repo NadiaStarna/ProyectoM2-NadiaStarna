@@ -42,50 +42,6 @@ Copiá el archivo de ejemplo y completá con tus datos:
 cp .env.example .env
 ```
 
-# PI-MINI-BLOG
-
-API REST para gestión de autores y posts, desarrollada con Node.js, Express y PostgreSQL.
-
-## Tecnologías
-
-- Node.js
-- Express
-- PostgreSQL (pg)
-- Vitest + Supertest
-- Railway (deploy)
-
----
-
-## Requisitos previos
-
-- Node.js v18 o superior
-- PostgreSQL instalado y corriendo
-
----
-
-## Instalación local
-
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/NadiaStarna/ProyectoM2-NadiaStarna.git
-cd PI-MINI-BLOG
-```
-
-### 2. Instalar dependencias
-
-```bash
-npm install
-```
-
-### 3. Configurar variables de entorno
-
-Copiá el archivo de ejemplo y completá con tus datos:
-
-```bash
-cp .env.example .env
-```
-
 ### 4. Crear la base de datos
 
 Abrí el SQL Shell (psql) y ejecutá:
@@ -184,11 +140,39 @@ La API está desplegada en Railway.
 
 ### Prompts utilizados
 
-- "Pasame todo el setup inicial del proyecto Node.js con Express y PostgreSQL"
-- "Creá los controllers de authors con validaciones y manejo de errores"
-- "Creá los tests con Vitest y Supertest para todos los endpoints"
-- "Ayudame a deployar en Railway paso a paso"
+**1. Controllers de authors con validaciones:**
+![Prompt 1](docs/Prompt1.jpeg)
+
+**2. Tests con Vitest y Supertest:**
+![Prompt 2](docs/Prompt2.jpeg)
+
+**3. Error npm ci en Railway:**
+![Prompt 3](docs/Prompt3.jpeg)
+
+**4. Separación en capa de services:**
+![Prompt 4](docs/Prompt4.jpeg)
 
 ### Cómo influyó en el desarrollo
 
-La IA fue utilizada como guía técnica paso a paso para estructurar el proyecto, implementar los endpoints CRUD, configurar los tests y realizar el deploy. Todo el código fue revisado y comprendido por la desarrolladora antes de ser incorporado al proyecto.
+La IA fue utilizada como guía técnica a lo largo de todo el proyecto:
+
+- **Implementación de endpoints:** ayudó a crear los controllers 
+con validaciones de campos obligatorios, control de email único 
+y manejo del error 23505 de PostgreSQL.
+
+- **Testing:** guió la implementación de los 23 tests con Vitest 
+y Supertest cubriendo flujos exitosos y casos de error como 
+400, 404 y validaciones.
+
+- **Resolución de errores:** permitió diagnosticar y resolver el 
+error npm ci EUSAGE que impedía el deploy en Railway.
+
+- **Buenas prácticas:** sugirió la separación en capa de services 
+moviendo las queries SQL fuera de los controllers para mejorar 
+la arquitectura del proyecto.
+
+Todo el código fue revisado, comprendido y adaptado por la 
+desarrolladora antes de ser incorporado al proyecto.Prompt 4.jpeg)
+
+#
+## DESARROLLADORA: Starna Nadia. 
