@@ -1,6 +1,8 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
+import YAML from 'yamljs';
+import path from 'path';
+
 import { errorHandler } from './middleware/errorHandler.js';
 import authorsRouter from './routes/authors-routes.js';
 import postsRouter from './routes/posts-routes.js';
@@ -8,27 +10,14 @@ import postsRouter from './routes/posts-routes.js';
 const app = express();
 app.use(express.json());
 
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'API Nadia',
-      version: '1.0.0',
-      description: 'Documentación de mi API',
-    },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-      },
-    ],
-  },
-  apis: ['./src/routes/*.js'],
-};
+// 🔥 Swagger
+const swaggerDocument = YAML.load(
+  path.resolve('src/yaml/openapi.yaml')
+);
 
-const swaggerSpec = swaggerJsdoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+// 🔥 Rutas
 app.get('/', (req, res) => {
   res.send('Servidor funcionando');
 });
@@ -36,6 +25,7 @@ app.get('/', (req, res) => {
 app.use('/api/authors', authorsRouter);
 app.use('/api/posts', postsRouter);
 
+// 🔥 Error handler
 app.use(errorHandler);
 
 export default app;

@@ -1,18 +1,18 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
-  getAllAuthors,
+  getAuthors,
   getAuthorById,
   createAuthor,
   updateAuthor,
   deleteAuthor
-} from '../controllers/authors-controller.js';
+} from "../controllers/authors-controller.js";
 
-const authorsRouter = Router();
+const router = Router();
 
-authorsRouter.get('/',     getAllAuthors);
-authorsRouter.get('/:id',  getAuthorById);
-authorsRouter.post('/',    createAuthor);
-authorsRouter.put('/:id',  updateAuthor);
-authorsRouter.delete('/:id', deleteAuthor);
+router.get("/", getAuthors);
+router.post("/", createAuthor);
+router.get("/:id", getAuthorById);
+router.put("/:id", updateAuthor);
+router.delete("/:id", deleteAuthor);
 
-export default authorsRouter;
+export default router;
