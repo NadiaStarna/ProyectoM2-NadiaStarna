@@ -1,6 +1,6 @@
 import * as authorsService from '../services/authors-service.js';
 
-export const getAuthors = async (req, res, next) => {
+export const getAllAuthors = async (req, res, next) => {
   try {
     const authors = await authorsService.getAllAuthors();
     res.status(200).json(authors);

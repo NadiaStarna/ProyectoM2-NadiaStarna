@@ -5,7 +5,6 @@ import pool from '../src/db/config.js';
 
 describe('POSTS endpoints', () => {
 
-  // GET /api/posts
   describe('GET /api/posts', () => {
     it('debe retornar lista de posts con status 200', async () => {
       const res = await request(app).get('/api/posts');
@@ -14,7 +13,6 @@ describe('POSTS endpoints', () => {
     });
   });
 
-  // GET /api/posts/:id
   describe('GET /api/posts/:id', () => {
     it('debe retornar un post existente con status 200', async () => {
       const res = await request(app).get('/api/posts/1');
@@ -28,7 +26,6 @@ describe('POSTS endpoints', () => {
     });
   });
 
-  // GET /api/posts/author/:authorId
   describe('GET /api/posts/author/:authorId', () => {
     it('debe retornar posts de un autor con status 200', async () => {
       const res = await request(app).get('/api/posts/author/1');
@@ -42,7 +39,6 @@ describe('POSTS endpoints', () => {
     });
   });
 
-  // POST /api/posts
   describe('POST /api/posts', () => {
     it('debe crear un post y retornar 201', async () => {
       const res = await request(app)
@@ -86,7 +82,6 @@ describe('POSTS endpoints', () => {
     });
   });
 
-  // PUT /api/posts/:id
   describe('PUT /api/posts/:id', () => {
     it('debe actualizar un post y retornar 200', async () => {
       const res = await request(app)
@@ -108,7 +103,6 @@ describe('POSTS endpoints', () => {
     });
   });
 
-  // DELETE /api/posts/:id
   describe('DELETE /api/posts/:id', () => {
     it('debe retornar 404 si el post no existe', async () => {
       const res = await request(app).delete('/api/posts/9999');

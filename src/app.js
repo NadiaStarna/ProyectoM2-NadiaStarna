@@ -10,14 +10,12 @@ import postsRouter from './routes/posts-routes.js';
 const app = express();
 app.use(express.json());
 
-// 🔥 Swagger
 const swaggerDocument = YAML.load(
   path.resolve('src/yaml/openapi.yaml')
 );
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// 🔥 Rutas
 app.get('/', (req, res) => {
   res.send('Servidor funcionando');
 });
@@ -25,7 +23,6 @@ app.get('/', (req, res) => {
 app.use('/api/authors', authorsRouter);
 app.use('/api/posts', postsRouter);
 
-// 🔥 Error handler
 app.use(errorHandler);
 
 export default app;

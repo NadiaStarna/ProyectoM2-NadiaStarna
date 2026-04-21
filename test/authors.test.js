@@ -5,7 +5,6 @@ import pool from '../src/db/config.js';
 
 describe('AUTHORS endpoints', () => {
 
-  // GET /api/authors
   describe('GET /api/authors', () => {
     it('debe retornar lista de autores con status 200', async () => {
       const res = await request(app).get('/api/authors');
@@ -14,7 +13,6 @@ describe('AUTHORS endpoints', () => {
     });
   });
 
-  // GET /api/authors/:id
   describe('GET /api/authors/:id', () => {
     it('debe retornar un autor existente con status 200', async () => {
       const res = await request(app).get('/api/authors/1');
@@ -28,7 +26,6 @@ describe('AUTHORS endpoints', () => {
     });
   });
 
-  // POST /api/authors
   describe('POST /api/authors', () => {
     it('debe crear un autor y retornar 201', async () => {
       const res = await request(app)
@@ -65,7 +62,6 @@ describe('AUTHORS endpoints', () => {
     });
   });
 
-  // PUT /api/authors/:id
   describe('PUT /api/authors/:id', () => {
     it('debe actualizar un autor y retornar 200', async () => {
       const res = await request(app)
@@ -86,8 +82,7 @@ describe('AUTHORS endpoints', () => {
       expect(res.status).toBe(404);
     });
   });
-
-  // DELETE /api/authors/:id
+  
   describe('DELETE /api/authors/:id', () => {
     it('debe retornar 404 si el autor no existe', async () => {
       const res = await request(app).delete('/api/authors/9999');
