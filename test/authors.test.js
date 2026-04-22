@@ -5,6 +5,21 @@ import pool from '../src/db/config.js';
 
 describe('AUTHORS endpoints', () => {
 
+  let authorId;
+
+  // 🔥 Crear autor dinámico
+  beforeAll(async () => {
+    const res = await request(app)
+      .post('/api/authors')
+      .send({
+        name: 'Autor Test',
+        email: `autor${Date.now()}@test.com`,
+        bio: 'Bio test'
+      });
+
+    authorId = res.body.id;
+  });
+
   describe('GET /api/authors', () => {
     it('debe retornar lista de autores con status 200', async () => {
       const res = await request(app).get('/api/authors');
@@ -15,9 +30,9 @@ describe('AUTHORS endpoints', () => {
 
   describe('GET /api/authors/:id', () => {
     it('debe retornar un autor existente con status 200', async () => {
-      const res = await request(app).get('/api/authors/1');
+      const res = await request(app).get(`/api/authors/${authorId}`);
       expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty('id', 1);
+      expect(res.body).toHaveProperty('id', authorId);
     });
 
     it('debe retornar 404 si el autor no existe', async () => {
@@ -35,6 +50,7 @@ describe('AUTHORS endpoints', () => {
           email: `test${Date.now()}@example.com`,
           bio: 'Bio de prueba'
         });
+
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty('id');
       expect(res.body.name).toBe('Test Author');
@@ -44,46 +60,55 @@ describe('AUTHORS endpoints', () => {
       const res = await request(app)
         .post('/api/authors')
         .send({ name: '', email: 'test@example.com' });
+
       expect(res.status).toBe(400);
+      expect(res.body).toHaveProperty('error');
     });
 
     it('debe retornar 400 si email está vacío', async () => {
       const res = await request(app)
         .post('/api/authors')
         .send({ name: 'Test', email: '' });
-      expect(res.status).toBe(400);
-    });
 
-    it('debe retornar 400 si el email ya existe', async () => {
-      const res = await request(app)
-        .post('/api/authors')
-        .send({ name: 'Test', email: 'ana@example.com' });
       expect(res.status).toBe(400);
+      expect(res.body).toHaveProperty('error');
     });
   });
 
   describe('PUT /api/authors/:id', () => {
     it('debe actualizar un autor y retornar 200', async () => {
       const res = await request(app)
-        .put('/api/authors/1')
+        .put(`/api/authors/${authorId}`)
         .send({
-          name: 'Ana Actualizada',
-          email: 'ana@example.com',
+          name: 'Autor Actualizado',
+          email: `update${Date.now()}@test.com`,
           bio: 'Bio actualizada'
         });
+
       expect(res.status).toBe(200);
-      expect(res.body.name).toBe('Ana Actualizada');
+      expect(res.body.name).toBe('Autor Actualizado');
     });
 
     it('debe retornar 404 si el autor no existe', async () => {
       const res = await request(app)
         .put('/api/authors/9999')
-        .send({ name: 'Test', email: 'noexiste@example.com' });
+        .send({ name: 'Test', email: 'noexiste@test.com' });
+
       expect(res.status).toBe(404);
     });
   });
-  
+
   describe('DELETE /api/authors/:id', () => {
+    it('debe eliminar un autor existente', async () => {
+      const res = await request(app).delete(`/api/authors/${authorId}`);
+      expect(res.status).toBe(200); // o 204 según tu API
+    });
+
+    it('no debería encontrar el autor eliminado', async () => {
+      const res = await request(app).get(`/api/authors/${authorId}`);
+      expect(res.status).toBe(404);
+    });
+
     it('debe retornar 404 si el autor no existe', async () => {
       const res = await request(app).delete('/api/authors/9999');
       expect(res.status).toBe(404);

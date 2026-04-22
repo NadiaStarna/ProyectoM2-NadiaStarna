@@ -2,27 +2,35 @@
 
 API REST para gestión de autores y posts, desarrollada con Node.js, Express y PostgreSQL.
 
-Este proyecto implementa una arquitectura backend completa con validaciones, testing automatizado y
-documentación OpenAPI, simulando un entorno real de desarrollo.
+---
 
-## Tecnologías
+## 📌 Descripción
+
+Este proyecto consiste en una API REST que permite gestionar autores y publicaciones (posts), implementando operaciones CRUD completas.
+
+Fue desarrollado como parte de un Proyecto Integrador con el objetivo de construir un backend funcional, conectado a una base de datos PostgreSQL, con validaciones, testing automatizado y documentación.
+
+---
+
+## 🚀 Tecnologías utilizadas
 
 - Node.js
 - Express
 - PostgreSQL (pg)
 - Vitest + Supertest
+- Swagger / OpenAPI
 - Railway (deploy)
 
 ---
 
-## Requisitos previos
+## ⚙️ Requisitos previos
 
 - Node.js v18 o superior
-- PostgreSQL instalado y corriendo
+- PostgreSQL instalado y en ejecución
 
 ---
 
-## Instalación local
+## 💻 Instalación local
 
 ### 1. Clonar el repositorio
 
@@ -31,140 +39,129 @@ git clone https://github.com/NadiaStarna/ProyectoM2-NadiaStarna.git
 cd ProyectoM2-NadiaStarna
 ```
 
+---
+
 ### 2. Instalar dependencias
 
 ```bash
 npm install
 ```
 
-### 3. Configurar variables de entorno
+---
 
-Copiá el archivo de ejemplo y completá con tus datos:
+### 3. Crear la base de datos
 
-```bash
-cp .env.example .env
-```
-
-### 4. Crear la base de datos
-
-Abrí el SQL Shell (psql) y ejecutá:
+Abrir el SQL Shell (psql) y ejecutar:
 
 ```sql
 CREATE DATABASE miniblog;
 \c miniblog
 ```
 
-### 5. Ejecutar el script SQL
+---
 
-Pegá el contenido de `src/db/setup.sql` en el SQL Shell para crear las tablas y cargar los datos de prueba.
+### 4. Ejecutar script SQL
 
-### 6. Iniciar el servidor
+Ejecutar el archivo:
+
+```
+src/db/setup.sql
+```
+
+Esto creará las tablas y cargará datos de prueba.
+
+---
+
+### 5. Iniciar el servidor
 
 ```bash
 npm run dev
 ```
 
-El servidor estará corriendo en http://localhost:3000
+Servidor disponible en:
+
+```
+http://localhost:3000
+```
 
 ---
 
-## Endpoints disponibles
+## 📡 Endpoints disponibles
 
 ### Authors
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| GET | /api/authors | Listar todos los autores |
+| GET | /api/authors | Listar autores |
 | GET | /api/authors/:id | Obtener autor por ID |
 | POST | /api/authors | Crear autor |
 | PUT | /api/authors/:id | Actualizar autor |
 | DELETE | /api/authors/:id | Eliminar autor |
 
+---
+
 ### Posts
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| GET | /api/posts | Listar todos los posts |
+| GET | /api/posts | Listar posts |
 | GET | /api/posts/:id | Obtener post por ID |
-| GET | /api/posts/author/:authorId | Posts de un autor con detalle |
+| GET | /api/posts/author/:authorId | Obtener posts de un autor |
 | POST | /api/posts | Crear post |
 | PUT | /api/posts/:id | Actualizar post |
 | DELETE | /api/posts/:id | Eliminar post |
 
 ---
 
-## Tests
+## 🧪 Tests
+
+Ejecutar:
 
 ```bash
 npm test
 ```
 
-Corre 23 tests unitarios con Vitest y Supertest cubriendo todos los endpoints.
+Se incluyen tests unitarios utilizando Vitest y Supertest que cubren:
+
+- Creación de autores
+- Obtención de autores
+- Creación de posts
+- Manejo de errores (400, 404)
 
 ---
 
-## Documentación OpenAPI
+## 📘 Documentación OpenAPI
 
-El archivo `openapi.yaml` en la raíz contiene la documentación completa de la API.
+El archivo `openapi.yaml` contiene la documentación completa de la API.
 
-Para visualizarla online:
-1. Entrá a https://editor.swagger.io
-2. Copiá y pegá el contenido de `openapi.yaml`
+Para visualizarla:
 
----
-
-## Deploy en Railway
-
-La API está desplegada en Railway.
-
-**URL pública:** https://proyectom2-nadiastarna-production-dc94.up.railway.app 
-
-### Pasos para redeploy
-
-1. Hacer push a `main` en GitHub
-2. Railway redeploya automáticamente
+1. Ir a https://editor.swagger.io  
+2. Copiar y pegar el contenido del archivo `openapi.yaml`
 
 ---
 
-## Registro de uso de IA
+## 🌐 Deploy
 
-**Herramienta utilizada:** Claude (Anthropic)
+La aplicación se encuentra desplegada en Railway:
 
-### Prompts utilizados
+https://proyectom2-nadiastarna-production-dc94.up.railway.app
 
-**1. Controllers de authors con validaciones:**
-![Prompt 1](docs/Prompt1.jpeg)
+---
 
-**2. Tests con Vitest y Supertest:**
-![Prompt 2](docs/Prompt2.jpeg)
+## 🤖 Uso de IA
 
-**3. Error npm ci en Railway:**
-![Prompt 3](docs/Prompt3.jpeg)
+Durante el desarrollo del proyecto se utilizó inteligencia artificial como herramienta de apoyo para:
 
-**4. Separación en capa de services:**
-![Prompt 4](docs/Prompt4.jpeg)
+- Implementación de controllers
+- Creación de tests con Vitest y Supertest
+- Resolución de errores
+- Mejora de la estructura del proyecto
 
-### Cómo influyó en el desarrollo
+Todo el código fue revisado, comprendido y adaptado antes de ser utilizado.
 
-La IA fue utilizada como guía técnica a lo largo de todo el proyecto:
+---
 
-- **Implementación de endpoints:** ayudó a crear los controllers 
-con validaciones de campos obligatorios, control de email único 
-y manejo del error 23505 de PostgreSQL.
+## 👩‍💻 Desarrolladora
 
-- **Testing:** guió la implementación de los 23 tests con Vitest 
-y Supertest cubriendo flujos exitosos y casos de error como 
-400, 404 y validaciones.
-
-- **Resolución de errores:** permitió diagnosticar y resolver el 
-error npm ci EUSAGE que impedía el deploy en Railway.
-
-- **Buenas prácticas:** sugirió la separación en capa de services 
-moviendo las queries SQL fuera de los controllers para mejorar 
-la arquitectura del proyecto.
-
-Todo el código fue revisado, comprendido y adaptado por la 
-desarrolladora antes de ser incorporado al proyecto.Prompt 4.jpeg)
-
-#
-## DESARROLLADORA: Starna Nadia. 
+Nadia Starna
