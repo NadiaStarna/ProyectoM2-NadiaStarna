@@ -113,6 +113,7 @@ describe('POSTS endpoints', () => {
       const res = await request(app)
         .put(`/api/posts/${postId}`)
         .send({
+          author_id: authorId, // 🔥 CLAVE para que no falle
           title: 'Titulo actualizado',
           content: 'Contenido actualizado',
           published: true
@@ -125,7 +126,11 @@ describe('POSTS endpoints', () => {
     it('debe retornar 404 si el post no existe', async () => {
       const res = await request(app)
         .put('/api/posts/9999')
-        .send({ title: 'Titulo', content: 'Contenido' });
+        .send({
+          author_id: authorId, // 🔥 también necesario
+          title: 'Titulo',
+          content: 'Contenido'
+        });
 
       expect(res.status).toBe(404);
     });

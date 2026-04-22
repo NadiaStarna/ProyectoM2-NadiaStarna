@@ -13,11 +13,12 @@ export const validateAuthor = (req, res, next) => {
     });
   }
 
+  const emailClean = email.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!emailRegex.test(email)) {
+  if (!emailRegex.test(emailClean)) {
     return res.status(400).json({
-      error: "Email inválido"
+      error: "El email es inválido"
     });
   }
 

@@ -7,7 +7,6 @@ describe('AUTHORS endpoints', () => {
 
   let authorId;
 
-  // 🔥 Crear autor dinámico
   beforeAll(async () => {
     const res = await request(app)
       .post('/api/authors')
@@ -101,7 +100,7 @@ describe('AUTHORS endpoints', () => {
   describe('DELETE /api/authors/:id', () => {
     it('debe eliminar un autor existente', async () => {
       const res = await request(app).delete(`/api/authors/${authorId}`);
-      expect(res.status).toBe(200); // o 204 según tu API
+      expect(res.status).toBe(204); // ✅ corregido
     });
 
     it('no debería encontrar el autor eliminado', async () => {
