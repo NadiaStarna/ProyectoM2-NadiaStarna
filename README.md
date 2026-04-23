@@ -47,16 +47,7 @@ npm install
 
 ### 3. Configurar variables de entorno
 
-Crear un archivo `.env` en la raíz del proyecto basándose en `.env.example`:
-
-```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=miniblog
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
-PORT=3000
-```
+Crear un archivo `.env` en la raíz del proyecto basándose en `.env.example`
 
 ### 4. Crear la base de datos
 
@@ -89,35 +80,8 @@ Servidor disponible en: `http://localhost:3000`
 
 ## 📁 Estructura del proyecto
 PI-MINI-BLOG/
-├── src/
-│   ├── controllers/        # Lógica de cada endpoint
-│   │   ├── authors-controller.js
-│   │   └── posts-controller.js
-│   ├── db/
-│   │   ├── config.js       # Conexión a PostgreSQL
-│   │   └── setup.sql       # Creación de tablas y datos
-│   ├── middleware/
-│   │   └── errorHandler.js # Manejo centralizado de errores
-│   ├── routes/             # Definición de rutas
-│   │   ├── authors-routes.js
-│   │   └── posts-routes.js
-│   ├── services/           # Consultas a la base de datos
-│   │   ├── authors-service.js
-│   │   └── posts-service.js
-│   ├── validaciones/       # Validaciones de entrada
-│   │   ├── authors.validaciones.js
-│   │   └── posts.validaciones.js
-│   ├── app.js              # Configuración de Express
-│   └── server.js           # Punto de entrada
-├── test/
-│   ├── authors.test.js
-│   ├── authors-controller.test.js
-│   ├── posts.test.js
-│   ├── posts-controller.test.js
-│   └── errorHandler.test.js
-├── .env.example
-├── package.json
-└── vitest.config.js
+
+rehacerrrr 
 
 ---
 
@@ -161,16 +125,6 @@ npm run test:coverage
 npm run test:ui
 ```
 
-### Resultados de coverage
-
-| Archivo | Statements | Branches | Functions | Lines |
-|---|---|---|---|---|
-| controllers | 100% | 100% | 100% | 100% |
-| middleware | 100% | 100% | 100% | 100% |
-| routes | 100% | 100% | 100% | 100% |
-| services | 92% | 81% | 100% | 92% |
-| **Total** | **97%** | **97%** | **100%** | **97%** |
-
 ### Tipos de tests
 
 - **Tests de integración** (`authors.test.js`, `posts.test.js`) — prueban los endpoints HTTP completos contra la base de datos real
@@ -198,8 +152,6 @@ La aplicación está desplegada en Railway:
 ## 🤖 Uso de IA
 
 Durante el desarrollo se utilizaron herramientas de inteligencia artificial (Claude y ChatGPT) como apoyo.
-
-📄 
 
 ---
 
