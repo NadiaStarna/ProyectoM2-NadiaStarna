@@ -47,7 +47,7 @@ npm install
 
 ### 3. Configurar variables de entorno
 
-Crear un archivo `.env` en la raíz del proyecto basándose en `.env.example`
+Crear un archivo `.env` en la raíz del proyecto basándose en `.env.example`.
 
 ### 4. Crear la base de datos
 
@@ -69,8 +69,10 @@ Esto creará las tablas `authors` y `posts` y cargará datos de prueba.
 ### 6. Iniciar el servidor
 
 ```bash
+# Modo desarrollo (con hot reload)
 npm run dev
 
+# Modo producción
 npm start
 ```
 
@@ -79,9 +81,20 @@ Servidor disponible en: `http://localhost:3000`
 ---
 
 ## 📁 Estructura del proyecto
-PI-MINI-BLOG/
 
-rehacerrrr 
+PI-MINI-BLOG/ ├── coverage/ ├── docs/ │ ├── prompt1.png │ ├──
+prompt2.png │ ├── prompt3.png │ ├── prompt3a.png │ ├── prompt4.png │ ├──
+prompt4a.png │ └── uso-de-la-ia.md ├── node_modules/ ├── src/ │ ├──
+controllers/ │ │ ├── authors-controller.js │ │ └── posts-controller.js │
+├── db/ │ │ ├── config.js │ │ └── setup.sql │ ├── middleware/ │ │ └──
+errorHandler.js │ ├── routes/ │ │ ├── authors-routes.js │ │ └──
+posts-routes.js │ ├── services/ │ │ ├── authors-service.js │ │ └──
+posts-service.js │ ├── validaciones/ │ │ ├── authors.validaciones.js │ │
+└── posts.validaciones.js │ ├── yaml/ │ ├── app.js │ └── server.js ├──
+test/ │ ├── authors-controller.test.js │ ├── authors.test.js │ ├──
+errorHandler.test.js │ ├── posts-controller.test.js │ └── posts.test.js
+├── .env ├── .env.example ├── .gitignore ├── package-lock.json ├──
+package.json └── vitest.config.js
 
 ---
 
@@ -125,6 +138,16 @@ npm run test:coverage
 npm run test:ui
 ```
 
+### Resultados de coverage
+
+| Archivo | Statements | Branches | Functions | Lines |
+|---|---|---|---|---|
+| controllers | 100% | 100% | 100% | 100% |
+| middleware | 100% | 100% | 100% | 100% |
+| routes | 100% | 100% | 100% | 100% |
+| services | 92% | 81% | 100% | 92% |
+| **Total** | **97%** | **97%** | **100%** | **97%** |
+
 ### Tipos de tests
 
 - **Tests de integración** (`authors.test.js`, `posts.test.js`) — prueban los endpoints HTTP completos contra la base de datos real
@@ -145,13 +168,15 @@ También se puede visualizar el archivo `openapi.yaml` en [Swagger Editor](https
 
 La aplicación está desplegada en Railway:
 
-🔗 https://proyectom2-nadiastarna-production-dc94.up.railway.app/api-docs
+🔗 https://proyectom2-nadiastarna-production-dc94.up.railway.app
 
 ---
 
 ## 🤖 Uso de IA
 
 Durante el desarrollo se utilizaron herramientas de inteligencia artificial (Claude y ChatGPT) como apoyo.
+
+📄 [Ver documento completo de uso de IA](./docs/) 
 
 ---
 
