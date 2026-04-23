@@ -6,20 +6,20 @@ API REST para gestión de autores y posts, desarrollada con Node.js, Express y P
 
 ## 📌 Descripción
 
-Este proyecto consiste en una API REST que permite gestionar autores y publicaciones (posts), implementando operaciones CRUD completas.
-
-Fue desarrollado como parte de un Proyecto Integrador con el objetivo de construir un backend funcional, conectado a una base de datos PostgreSQL, con validaciones, testing automatizado y documentación.
+PI-MINI-BLOG es una API REST que permite gestionar autores y publicaciones (posts) con operaciones CRUD completas. Fue desarrollado como Proyecto Integrador con el objetivo de construir un backend funcional conectado a PostgreSQL, con validaciones, manejo de errores, testing automatizado y documentación OpenAPI.
 
 ---
 
 ## 🚀 Tecnologías utilizadas
 
-- Node.js
-- Express
-- PostgreSQL (pg)
-- Vitest + Supertest
-- Swagger / OpenAPI
-- Railway (deploy)
+| Tecnología | Uso |
+|---|---|
+| Node.js | Entorno de ejecución |
+| Express | Framework HTTP |
+| PostgreSQL + pg | Base de datos relacional |
+| Vitest + Supertest | Testing unitario e integración |
+| Swagger / OpenAPI | Documentación de la API |
+| Railway | Deploy en producción |
 
 ---
 
@@ -39,17 +39,26 @@ git clone https://github.com/NadiaStarna/ProyectoM2-NadiaStarna.git
 cd ProyectoM2-NadiaStarna
 ```
 
----
-
 ### 2. Instalar dependencias
 
 ```bash
 npm install
 ```
 
----
+### 3. Configurar variables de entorno
 
-### 3. Crear la base de datos
+Crear un archivo `.env` en la raíz del proyecto basándose en `.env.example`:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=miniblog
+DB_USER=tu_usuario
+DB_PASSWORD=tu_contraseña
+PORT=3000
+```
+
+### 4. Crear la base de datos
 
 Abrir el SQL Shell (psql) y ejecutar:
 
@@ -58,31 +67,57 @@ CREATE DATABASE miniblog;
 \c miniblog
 ```
 
----
+### 5. Ejecutar el script SQL
 
-### 4. Ejecutar script SQL
-
-Ejecutar el archivo:
-
-```
-src/db/setup.sql
+```bash
+psql -U tu_usuario -d miniblog -f src/db/setup.sql
 ```
 
-Esto creará las tablas y cargará datos de prueba.
+Esto creará las tablas `authors` y `posts` y cargará datos de prueba.
 
----
-
-### 5. Iniciar el servidor
+### 6. Iniciar el servidor
 
 ```bash
 npm run dev
+
+npm start
 ```
 
-Servidor disponible en:
+Servidor disponible en: `http://localhost:3000`
 
-```
-http://localhost:3000
-```
+---
+
+## 📁 Estructura del proyecto
+PI-MINI-BLOG/
+├── src/
+│   ├── controllers/        # Lógica de cada endpoint
+│   │   ├── authors-controller.js
+│   │   └── posts-controller.js
+│   ├── db/
+│   │   ├── config.js       # Conexión a PostgreSQL
+│   │   └── setup.sql       # Creación de tablas y datos
+│   ├── middleware/
+│   │   └── errorHandler.js # Manejo centralizado de errores
+│   ├── routes/             # Definición de rutas
+│   │   ├── authors-routes.js
+│   │   └── posts-routes.js
+│   ├── services/           # Consultas a la base de datos
+│   │   ├── authors-service.js
+│   │   └── posts-service.js
+│   ├── validaciones/       # Validaciones de entrada
+│   │   ├── authors.validaciones.js
+│   │   └── posts.validaciones.js
+│   ├── app.js              # Configuración de Express
+│   └── server.js           # Punto de entrada
+├── test/
+│   ├── authors.test.js
+│   ├── authors-controller.test.js
+│   ├── posts.test.js
+│   ├── posts-controller.test.js
+│   └── errorHandler.test.js
+├── .env.example
+├── package.json
+└── vitest.config.js
 
 ---
 
@@ -92,76 +127,83 @@ http://localhost:3000
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| GET | /api/authors | Listar autores |
-| GET | /api/authors/:id | Obtener autor por ID |
-| POST | /api/authors | Crear autor |
-| PUT | /api/authors/:id | Actualizar autor |
-| DELETE | /api/authors/:id | Eliminar autor |
-
----
+| GET | `/api/authors` | Listar todos los autores |
+| GET | `/api/authors/:id` | Obtener autor por ID |
+| POST | `/api/authors` | Crear un nuevo autor |
+| PUT | `/api/authors/:id` | Actualizar un autor |
+| DELETE | `/api/authors/:id` | Eliminar un autor |
 
 ### Posts
 
 | Método | Endpoint | Descripción |
 |--------|----------|-------------|
-| GET | /api/posts | Listar posts |
-| GET | /api/posts/:id | Obtener post por ID |
-| GET | /api/posts/author/:authorId | Obtener posts de un autor |
-| POST | /api/posts | Crear post |
-| PUT | /api/posts/:id | Actualizar post |
-| DELETE | /api/posts/:id | Eliminar post |
+| GET | `/api/posts` | Listar todos los posts |
+| GET | `/api/posts/:id` | Obtener post por ID |
+| GET | `/api/posts/author/:authorId` | Obtener posts de un autor |
+| POST | `/api/posts` | Crear un nuevo post |
+| PUT | `/api/posts/:id` | Actualizar un post |
+| DELETE | `/api/posts/:id` | Eliminar un post |
 
 ---
 
-## 🧪 Tests
+## 🧪 Testing
 
-Ejecutar:
+El proyecto cuenta con **70 tests** entre tests de integración y tests unitarios con mocks.
 
 ```bash
+# Correr todos los tests
 npm test
+
+# Correr tests con reporte de coverage
+npm run test:coverage
+
+# Correr tests con interfaz visual
+npm run test:ui
 ```
 
-Se incluyen tests unitarios utilizando Vitest y Supertest que cubren:
+### Resultados de coverage
 
-- Creación de autores
-- Obtención de autores
-- Creación de posts
-- Manejo de errores (400, 404)
+| Archivo | Statements | Branches | Functions | Lines |
+|---|---|---|---|---|
+| controllers | 100% | 100% | 100% | 100% |
+| middleware | 100% | 100% | 100% | 100% |
+| routes | 100% | 100% | 100% | 100% |
+| services | 92% | 81% | 100% | 92% |
+| **Total** | **97%** | **97%** | **100%** | **97%** |
+
+### Tipos de tests
+
+- **Tests de integración** (`authors.test.js`, `posts.test.js`) — prueban los endpoints HTTP completos contra la base de datos real
+- **Tests unitarios con mocks** (`authors-controller.test.js`, `posts-controller.test.js`, `errorHandler.test.js`) — prueban la lógica de cada función de forma aislada, sin base de datos
 
 ---
 
 ## 📘 Documentación OpenAPI
 
-El archivo `openapi.yaml` contiene la documentación completa de la API.
+La documentación de la API está disponible en Swagger UI una vez levantado el servidor:
+http://localhost:3000/api-docs
 
-Para visualizarla:
-
-1. Ir a https://editor.swagger.io  
-2. Copiar y pegar el contenido del archivo `openapi.yaml`
+También se puede visualizar el archivo `openapi.yaml` en [Swagger Editor](https://editor.swagger.io).
 
 ---
 
 ## 🌐 Deploy
 
-La aplicación se encuentra desplegada en Railway:
+La aplicación está desplegada en Railway:
 
-https://proyectom2-nadiastarna-production-dc94.up.railway.app
+🔗 https://proyectom2-nadiastarna-production-dc94.up.railway.app/api-docs
 
 ---
 
 ## 🤖 Uso de IA
 
-Durante el desarrollo del proyecto se utilizó inteligencia artificial como herramienta de apoyo para:
+Durante el desarrollo se utilizaron herramientas de inteligencia artificial (Claude y ChatGPT) como apoyo.
 
-- Implementación de controllers
-- Creación de tests con Vitest y Supertest
-- Resolución de errores
-- Mejora de la estructura del proyecto
-
-Todo el código fue revisado, comprendido y adaptado antes de ser utilizado.
+📄 
 
 ---
 
 ## 👩‍💻 Desarrolladora
 
-Nadia Starna
+**Nadia Starna**  
+[GitHub](https://github.com/NadiaStarna)
