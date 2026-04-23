@@ -148,11 +148,43 @@ npm run test:ui
 | services | 92% | 81% | 100% | 92% |
 | **Total** | **97%** | **97%** | **100%** | **97%** |
 
-### Tipos de tests
+## 🧪 Tests
 
-- **Tests de integración** (`authors.test.js`, `posts.test.js`) — prueban los endpoints HTTP completos contra la base de datos real
-- **Tests unitarios con mocks** (`authors-controller.test.js`, `posts-controller.test.js`, `errorHandler.test.js`) — prueban la lógica de cada función de forma aislada, sin base de datos
+El proyecto cuenta con dos tipos de tests en ramas separadas.
 
+### Tests unitarios
+
+1. Cambiar a la rama de tests:
+```bash
+   git checkout fix-tests
+```
+
+2. Instalar las dependencias:
+```bash
+   npm install
+```
+
+3. Correr los tests:
+```bash
+   npm test
+```
+
+### Coverage
+
+1. Cambiar a la rama de coverage:
+```bash
+   git checkout fix-tests-e3822f8
+```
+
+2. Instalar las dependencias:
+```bash
+   npm install
+```
+
+3. Correr el coverage:
+```bash
+   npm run coverage
+```
 ---
 
 ## 📘 Documentación OpenAPI
